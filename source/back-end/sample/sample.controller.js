@@ -30,7 +30,7 @@ const sample = async (req = request, res = response) => {
             }
         }   
     */
-    try {
+        try {
         // Your Code Goes Here!!!!
         
         // Return query result

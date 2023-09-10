@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
-const flight_schema = new mongoose.Schema({
-  _id: String,
+const flights_schema = new mongoose.Schema({
   AIRLINE: String,
   FLIGHT_NUMBER: Number,
   ORIGIN_AIRPORT: String,
@@ -11,6 +10,6 @@ const flight_schema = new mongoose.Schema({
   ARRIVAL_DATE: Date,
 });
 
-const Flight = mongoose.model('Flight', flight_schema);
+const Flights = mongoose.model('Flights', flights_schema);
 
-module.exports = Flight;
+module.exports = Flights;
