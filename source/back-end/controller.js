@@ -281,8 +281,6 @@ const flight_by_id = async (req, res) => {
 
   try {
     const{id} = req.query;
-    console.log(typeof id); // Imprime el valor de id en la consola
-    console.log('Valor de id:', id);
     const flight = await Flights.findById(id);
 
     if (!flight) {

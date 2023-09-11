@@ -5,24 +5,44 @@ const swagger_autogen = require("swagger-autogen")({ openapi: "3.0.0" });
 
 // Data schemas
 const mongo_specs = {
-    Sample: {
+    flights: {
         type: "object",
         properties: {
-            ATTRIBUTE_1: {
+            AIRLINE: {
                 type: "string",
             },
-            ATTRIBUTE_2: {
+            FLIGHT_NUMBER: {
                 type: "number",
             },
-            ATTRIBUTE_3: {
+            ORIGIN_AIRPORT: {
+                type: "string",
+            },
+            DESTINATION_AIRPORT: {
+                type: "string",
+            },
+            CANCELLED: {
                 type: "boolean",
             },
-            ATTRIBUTE_4: {
+            DEPARTURE_DATE: {
+                type: "date",
+            },
+            ARRIVAL_DATE: {
                 type: "date",
             },
         },
-    }
-};
+    },
+    airline: {
+        type: "object",
+        properties: {
+            IATA_CODE: {
+                type: "string",
+            },
+            AIRLINE: {
+                type: "string",
+            },
+        },
+    },
+    };
 
 // API general specs
 const general_specs = {

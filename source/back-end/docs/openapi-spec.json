@@ -13,16 +13,225 @@
     {
       "url": "https://localhost:8080",
       "description": "Local Server"
-    },
-    {
-      "url": "https://{app-name}.{cloud-region}.codeengine.appdomain.cloud",
-      "description": "IBM Code Engine Deployment"
     }
+
   ],
-  "paths": {},
+  "paths": {
+    
+    "/airlines": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/airline"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/flights-by-departure-date-airline-origin-dest": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "departureDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "airline",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "originAirport",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "destinationAirport",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/flights-by-departure-date-airline": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "departureDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "airline",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/flights-by-departure-date-origin-dest": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "departureDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "originAirport",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "destinationAirport",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/flights-by-departure-date": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "departureDate",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/flights-origin-dest": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "originAirport",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "destinationAirport",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/flights-by-id": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
   "components": {
     "schemas": {
-      "Sample": {
+      "flights": {
         "type": "object",
         "properties": {
           "type": {
@@ -32,7 +241,7 @@
           "properties": {
             "type": "object",
             "properties": {
-              "ATTRIBUTE_1": {
+              "AIRLINE": {
                 "type": "object",
                 "properties": {
                   "type": {
@@ -41,7 +250,7 @@
                   }
                 }
               },
-              "ATTRIBUTE_2": {
+              "FLIGHT_NUMBER": {
                 "type": "object",
                 "properties": {
                   "type": {
@@ -50,7 +259,25 @@
                   }
                 }
               },
-              "ATTRIBUTE_3": {
+              "ORIGIN_AIRPORT": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  }
+                }
+              },
+              "DESTINATION_AIRPORT": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  }
+                }
+              },
+              "CANCELLED": {
                 "type": "object",
                 "properties": {
                   "type": {
@@ -59,12 +286,53 @@
                   }
                 }
               },
-              "ATTRIBUTE_4": {
+              "DEPARTURE_DATE": {
                 "type": "object",
                 "properties": {
                   "type": {
                     "type": "string",
                     "example": "date"
+                  }
+                }
+              },
+              "ARRIVAL_DATE": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "date"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "airline": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "object"
+          },
+          "properties": {
+            "type": "object",
+            "properties": {
+              "IATA_CODE": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
+                  }
+                }
+              },
+              "AIRLINE": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "string"
                   }
                 }
               }
