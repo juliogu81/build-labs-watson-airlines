@@ -8,7 +8,7 @@
 FROM --platform=linux/amd64 node:current-alpine as build
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /source
 
 # Install dependencies
 COPY package*.json ./
@@ -22,4 +22,4 @@ COPY . .
 # ------------------------------
 
 # Run application
-CMD [ "node", "app.js" ]
+CMD [ "node", "server.js" ]
