@@ -1,12 +1,7 @@
-const https = require("https");
 const path = require("path");
-const mongoose = require('mongoose');
 const { create_connection } = require("./mongodb");
-const mongo = require("./mongodb");
 const app = require('./app');
 const port = 8080;
-
-
 
 app.listen(port, () => {
   console.log(`Servidor HTTPS escuchando en el puerto ${port}`);

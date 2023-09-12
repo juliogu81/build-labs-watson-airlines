@@ -11,17 +11,14 @@
   },
   "servers": [
     {
-      "url": "https://localhost:8080",
+      "url": "http://localhost:8080",
       "description": "Local Server"
     }
-
   ],
   "paths": {
-    
     "/airlines": {
       "get": {
         "description": "",
-        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
@@ -40,6 +37,9 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -79,94 +79,22 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/flights-by-departure-date-airline": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "departureDate",
-            "in": "query",
-            "schema": {
-              "type": "string"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                    "type" : "object",
+                    "properties" : {
+                        "result" : {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/flights"
+                            }
+                        }
+                    }
+                }
+              }
             }
-          },
-          {
-            "name": "airline",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/flights-by-departure-date-origin-dest": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "departureDate",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "originAirport",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "destinationAirport",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/flights-by-departure-date": {
-      "get": {
-        "description": "",
-        "parameters": [
-          {
-            "name": "departureDate",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
           },
           "500": {
             "description": "Internal Server Error"
@@ -195,7 +123,22 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                    "type" : "object",
+                    "properties" : {
+                        "result" : {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/flights"
+                            }
+                        }
+                    }
+                }
+              }
+            }
           },
           "500": {
             "description": "Internal Server Error"
@@ -217,7 +160,22 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                    "type" : "object",
+                    "properties" : {
+                        "result" : {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/components/schemas/flights"
+                            }
+                        }
+                    }
+                }
+              }
+            }
           },
           "404": {
             "description": "Not Found"
