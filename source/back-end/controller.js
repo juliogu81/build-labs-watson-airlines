@@ -3,6 +3,7 @@ const{mongo}= require("./mongodb");
 // Mongoose Schemas
 const Airlines = require("./airlines.schema");
 const Flights = require("./flights.schema");
+const { format } = require("morgan");
 /**
  * Sample Controller
  * @param {JSON} req request information
@@ -34,6 +35,7 @@ const airlines = async (req, res) => {
         }  
         */ 
     try {
+    console.log(`llego hasta aca`);
     const airlines = await Airlines.find({});
     res.json({ result: airlines });
   } catch (error) {
@@ -83,8 +85,23 @@ const flights_origin_dest = async (req, res) => {
 
 
 
+  function formatDateToISO(inputDate) {
+    // Parseo de la fecha de entrada (mm-yyyy-dd)
+    const [month, year, day] = inputDate.split('-').map(Number);
+  
+    // Construcción del objeto Date
+    const date = new Date(year, month - 1, day); // Restamos 1 al mes porque los meses en JavaScript van de 0 a 11
+  
+    // Formateo de la fecha a ISO
+    const isoDate = date.toISOString();
+  
+    return isoDate;
+  }
 
-const flights_by_dDate_airline_origin_dest = async (req, res) => {
+
+
+
+  const flights_by_dDate_airline_origin_dest = async (req, res) => {
     /*swagger.responses[200] = {
         "description": "OK",
         "content": {
@@ -106,13 +123,20 @@ const flights_by_dDate_airline_origin_dest = async (req, res) => {
     */  
     const { departureDate, airline, originAirport, destinationAirport } = req.query;
 
-  try {
+  try {  
+    // Formateo de la fecha a ISO
+    const [month, year, day] = departureDate.split('-');
+    const fechaISO = new Date(`${year}-${month}-${day}T00:00:00.000Z`);
+    const startOfDay = new Date(fechaISO);
+    const endOfDay = new Date(fechaISO);
+    endOfDay.setDate(endOfDay.getDate() + 1);
     const flights = await Flights.find({
-      $and: [
-        {
-          DEPARTURE_DATE: 
-             new Date(departureDate),
+      $and: [{
           
+          DEPARTURE_DATE:{
+          $gte: startOfDay,
+          $lt: endOfDay, 
+          }
         },
         {
           AIRLINE: airline, // Filtrar vuelos por aerolínea
@@ -125,7 +149,7 @@ const flights_by_dDate_airline_origin_dest = async (req, res) => {
         },
       ],
     });
-
+    console.log(typeof departureDate);
     res.json({ result: flights });
   } catch (error) {
     res.status(500).json({ status: 'Error interno del servidor' });
