@@ -12,8 +12,7 @@ const { format } = require("morgan");
  */
 
 
-
-
+//Query para mostrar todas las aerolineas
 const airlines = async (req, res) => {
    /* #swagger.responses[200] = {
             "description": "OK",
@@ -35,7 +34,6 @@ const airlines = async (req, res) => {
         }  
         */ 
     try {
-    console.log(`llego hasta aca`);
     const airlines = await Airlines.find({});
     res.json({ result: airlines });
   } catch (error) {
@@ -47,6 +45,7 @@ const airlines = async (req, res) => {
 
 
 
+//Query para mostrar todos los vuelos por origen y destino
 
 const flights_origin_dest = async (req, res) => {
     /*swagger.responses[200] = {
@@ -85,23 +84,11 @@ const flights_origin_dest = async (req, res) => {
 
 
 
-  function formatDateToISO(inputDate) {
-    // Parseo de la fecha de entrada (mm-yyyy-dd)
-    const [month, year, day] = inputDate.split('-').map(Number);
+
+//Query para mostrar todos los vuelos por fecha, aerolinea, origen y destino
   
-    // Construcción del objeto Date
-    const date = new Date(year, month - 1, day); // Restamos 1 al mes porque los meses en JavaScript van de 0 a 11
-  
-    // Formateo de la fecha a ISO
-    const isoDate = date.toISOString();
-  
-    return isoDate;
-  }
 
-
-
-
-  const flights_by_dDate_airline_origin_dest = async (req, res) => {
+const flights_by_dDate_airline_origin_dest = async (req, res) => {
     /*swagger.responses[200] = {
         "description": "OK",
         "content": {
@@ -159,6 +146,7 @@ const flights_origin_dest = async (req, res) => {
 
 
 
+//Query para mostrar todos los vuelos por id
 
 const flight_by_id = async (req, res) => {
     /*swagger.responses[200] = {

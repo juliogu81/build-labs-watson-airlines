@@ -14,12 +14,22 @@
       "url": "http://localhost:8080",
       "description": "Local Server"
     },
-    {        
-      "url": "https://api-watson.171zl58oviyp.us-south.codeengine.appdomain.cloud/",
+    {         
+      "url": "https://api-watson.171zl58oviyp.us-south.codeengine.appdomain.cloud",
       "description": "IBM Code Engine Deployment"
-  }
+    }
   ],
   "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/airlines": {
       "get": {
         "description": "",
@@ -87,15 +97,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                    "type" : "object",
-                    "properties" : {
-                        "result" : {
-                            "type": "array",
-                            "items": {
-                              "$ref": "#/components/schemas/flights"
-                            }
-                        }
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/flights"
+                      }
                     }
+                  }
                 }
               }
             }
@@ -131,15 +141,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                    "type" : "object",
-                    "properties" : {
-                        "result" : {
-                            "type": "array",
-                            "items": {
-                              "$ref": "#/components/schemas/flights"
-                            }
-                        }
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/flights"
+                      }
                     }
+                  }
                 }
               }
             }
@@ -168,15 +178,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                    "type" : "object",
-                    "properties" : {
-                        "result" : {
-                            "type": "array",
-                            "items": {
-                              "$ref": "#/components/schemas/flights"
-                            }
-                        }
+                  "type": "object",
+                  "properties": {
+                    "result": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/flights"
+                      }
                     }
+                  }
                 }
               }
             }

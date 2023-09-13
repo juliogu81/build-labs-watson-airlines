@@ -78,7 +78,7 @@ const general_specs = {
 // API Routes
 // NOTE: if using Express Router, pass only the root file where the route starts.
 const api_routes = [
-    "./app.js",
+    "../app.js",
 ];
 
 // Output file path
